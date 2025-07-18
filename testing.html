@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Կանալների Մաքրման Պատվերի Ձև</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Light Blue Gradient -->
+    <!-- Application Structure Plan: This application is a standalone form for submitting new orders. It focuses solely on the data input aspect, providing a clean, centered layout with a visually pleasing background. The primary goal is to offer a dedicated, user-friendly interface for order entry without the dashboard elements, making it ideal for quick data capture. -->
+    <!-- Visualization & Content Choices: 
+        1. Source: All form fields -> Goal: Input -> Viz: Interactive HTML Form -> Interaction: User fills fields, submits data (logged to console for this standalone version) -> Justification: Directly implements the core data entry requirement from the source.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Fira Sans', sans-serif;
+            background: linear-gradient(to right bottom, #e0f2fe, #bfdbfe); /* light blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        .btn-primary {
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb; /* blue-600 */
+        }
+        input, select, textarea {
+            border-radius: 0.375rem;
+            border: 1px solid #cbd5e1; /* slate-300 */
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1 class="text-3xl font-bold mb-2 text-slate-900 text-center">Գրանցել Նոր Պատվեր</h1>
+        <p class="text-slate-600 mb-8 text-center">Խնդրում ենք լրացնել ստորև բերված դաշտերը։</p>
+        <form id="order-form" class="space-y-4">
+            <div>
+                <label for="call-id" class="font-medium text-sm text-slate-700">Զանգի ID</label>
+                <input type="text" id="call-id" placeholder="Ավտոմատ կգեներացվի" disabled class="bg-slate-100 cursor-not-allowed">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="date" class="font-medium text-sm text-slate-700">Ամսաթիվ</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div>
+                    <label for="time" class="font-medium text-sm text-slate-700">Ժամ</label>
+                    <input type="time" id="time" required>
+                </div>
+            </div>
+            <div>
+                <label for="phone" class="font-medium text-sm text-slate-700">Հեռախոսահամար</label>
+                <input type="tel" id="phone" required placeholder="09X XXXXXX">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="first-name" class="font-medium text-sm text-slate-700">Անուն</label>
+                    <input type="text" id="first-name" required>
+                </div>
+                <div>
+                    <label for="last-name" class="font-medium text-sm text-slate-700">Ազգանուն</label>
+                    <input type="text" id="last-name" required>
+                </div>
+            </div>
+            <div>
+                <label for="address" class="font-medium text-sm text-slate-700">Հասցե</label>
+                <input type="text" id="address" required>
+            </div>
+            <div>
+                <label for="service-type" class="font-medium text-sm text-slate-700">Ծառայության Տեսակ</label>
+                <select id="service-type" required>
+                    <option value="Կանալի մաքրում (խոհանոց)">Կանալի մաքրում (խոհանոց)</option>
+                    <option value="Կանալի մաքրում (լոգարան)">Կանալի մաքրում (լոգարան)</option>
+                    <option value="Գլխավոր կանալի մաքրում">Գլխավոր կանալի մաքրում</option>
+                    <option value="Դիտահորի մաքրում">Դիտահորի մաքրում</option>
+                    <option value="Այլ">Այլ</option>
+                </select>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                 <div>
+                    <label for="service-amount" class="font-medium text-sm text-slate-700">Գումար (AMD)</label>
+                    <input type="number" id="service-amount" required min="0">
+                </div>
+                <div>
+                    <label for="discount" class="font-medium text-sm text-slate-700">Զեղչ (%)</label>
+                    <input type="number" id="discount" value="0" min="0" max="100">
+                </div>
+            </div>
+            <div>
+                 <label for="payment-status" class="font-medium text-sm text-slate-700">Վճարման Կարգավիճակ</label>
+                 <select id="payment-status" required>
+                    <option value="Վճարված է">Վճարված է</option>
+                    <option value="Սպասման մեջ է">Սպասման մեջ է</option>
+                    <option value="Չվճարված">Չվճարված</option>
+                </select>
+            </div>
+            <div>
+                <label for="notes" class="font-medium text-sm text-slate-700">Նշումներ</label>
+                <textarea id="notes" rows="3"></textarea>
+            </div>
+            <div class="pt-2">
+                <button type="submit" class="btn-primary w-full">Ավելացնել Պատվեր</button>
+            </div>
+        </form>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('order-form');
+    
+    // Set today's date as default
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').value = today;
+
+    form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = {
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        phone: document.getElementById('phone').value,
+        firstName: document.getElementById('first-name').value,
+        lastName: document.getElementById('last-name').value,
+        address: document.getElementById('address').value,
+        serviceType: document.getElementById('service-type').value,
+        amount: parseFloat(document.getElementById('service-amount').value),
+        discount: parseFloat(document.getElementById('discount').value),
+        paymentStatus: document.getElementById('payment-status').value,
+        notes: document.getElementById('notes').value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwqAegA0ambrsfcjVA7X6qXmr-HSeUjnbeewwyau0O0wHWhU8y_eYsdv9-3MrPUQAqB/exec", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.text())
+    .then(result => {
+        alert("Պատվերը հաջողությամբ ուղարկվել է։");
+        form.reset();
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Սխալ տեղի ունեցավ։ Փորձեք կրկին։");
+    });
+});
+});
+</script>
+
+</body>
+</html>
