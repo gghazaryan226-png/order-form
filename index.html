@@ -171,9 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('date').value = new Date().toISOString().split('T')[0];
     })
     .catch(error => {
-        console.error("Error:", error);
-        alert("Սխալ տեղի ունեցավ։ Փորձեք կրկին։");
-    });
+    console.error("Error during fetch:", error);
+    alert("Սխալ տեղի ունեցավ։\n\n" + error);
+});
 });
 });
 </script>
